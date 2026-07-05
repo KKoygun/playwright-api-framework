@@ -3,6 +3,7 @@ import { PostsClient } from '../api/PostsClient';
 import { UsersClient } from '../api/UsersClient';
 import { CommentsClient } from '../api/CommentsClient';
 import { TodosClient } from '../api/TodosClient';
+import { AlbumsClient } from '../api/AlbumsClient';
 
 /**
  * Extended Playwright fixtures that inject typed API clients into every test.
@@ -18,6 +19,7 @@ type ApiFixtures = {
   usersClient: UsersClient;
   commentsClient: CommentsClient;
   todosClient: TodosClient;
+  albumsClient: AlbumsClient;
 };
 
 export const test = base.extend<ApiFixtures>({
@@ -32,6 +34,9 @@ export const test = base.extend<ApiFixtures>({
   },
   todosClient: async ({ request }, use) => {
     await use(new TodosClient(request));
+  },
+  albumsClient: async ({ request }, use) => {
+    await use(new AlbumsClient(request));
   },
 });
 
