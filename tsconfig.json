@@ -13,6 +13,6 @@
       "@schemas/*": ["src/schemas/*"]
     }
   },
-  "include": ["src/**/*", "tests/**/*"],
+  "include": ["src/**/*", "tests/**/*", "contract/**/*"],
   "exclude": ["node_modules"]
 }

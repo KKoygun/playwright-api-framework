@@ -5,7 +5,8 @@ import { z } from 'zod';
  *
  * Defining the contract here means any response shape change (field renamed,
  * type changed, field dropped) fails the test immediately — not silently in
- * a downstream assertion. This is lightweight contract testing without Pact.
+ * a downstream assertion. This checks the shape on the consumer side; the Pact
+ * test in contract/ checks that the provider keeps honouring it.
  */
 export const PostSchema = z.object({
   id: z.number(),
