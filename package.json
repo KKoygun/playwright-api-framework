@@ -1,7 +1,10 @@
 {
   "name": "playwright-api-framework",
   "version": "1.0.0",
-  "description": "REST API test framework built with Playwright request context, TypeScript, Zod schema validation and Allure reporting",
+  "description": "REST API test framework built with Playwright request context, TypeScript, Zod schema validation, Pact contract tests and Allure reporting",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "test": "playwright test",
     "test:ci": "playwright test --workers=4",
