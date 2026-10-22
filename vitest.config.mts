@@ -5,5 +5,7 @@ export default defineConfig({
   test: {
     include: ['contract/**/*.pact.test.ts'],
     testTimeout: 60_000,
+    // Pact sends anonymous usage stats unless told not to
+    env: { PACT_DO_NOT_TRACK: 'true' },
   },
 });

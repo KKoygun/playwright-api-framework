@@ -35,6 +35,9 @@ it('the provider honours the consumer contract', async () => {
       'post 99999 does not exist': async () => {
         stub.posts.delete(99999);
       },
+      'no posts exist': async () => {
+        stub.posts.clear();
+      },
       'user 1 exists': async () => {
         stub.users.set(1, {
           id: 1,

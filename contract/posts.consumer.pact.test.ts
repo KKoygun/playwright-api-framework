@@ -86,6 +86,7 @@ describe('PostsClient contract', () => {
 
     await pact
       .addInteraction()
+      .given('no posts exist')
       .uponReceiving('a request to create a post')
       .withRequest('POST', '/posts', (builder) => builder.jsonBody(like(payload)))
       .willRespondWith(201, (builder) => builder.jsonBody(like({ ...payload, id: integer(101) })))
