@@ -1,0 +1,46 @@
+name: Publish Allure report
+
+# Runs after "API Tests" on main and publishes that run's Allure report to GitHub Pages.
+# One-time setup: Settings → Pages → Source: GitHub Actions.
+on:
+  workflow_run:
+    workflows: ['API Tests']
+    types: [completed]
+    branches: [main]
+
+permissions:
+  actions: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy to GitHub Pages
+    # Publish failing runs too — that is when the report matters most
+    if: github.event.workflow_run.event == 'push'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Download the Allure report from the test run
+        uses: actions/download-artifact@v4
+        with:
+          name: allure-report
+          path: allure-report/
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ github.token }}
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: allure-report/
+
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4
